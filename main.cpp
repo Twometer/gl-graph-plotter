@@ -41,13 +41,14 @@ int main() {
 
     GLuint coordsShader = loader.loadShader("coords");
     GLint matLocation = glGetUniformLocation(coordsShader, "projectionMatrix");
+    GLint xOffLocation = glGetUniformLocation(coordsShader, "xOff");
 
     GLfloat *vertices = new GLfloat[4096 * 2];
     int verticesAlloc = 0;
     GLfloat *colors = new GLfloat[4096 * 3];
     int colorsAlloc = 0;
 
-    for (GLfloat i = 0; i <= 800.0f; i += 16.0f) {
+    for (GLfloat i = 0; i <= 850.0f; i += 16.0f) {
         vertices[verticesAlloc] = i;
         vertices[verticesAlloc + 1] = 0;
         vertices[verticesAlloc + 2] = i;
@@ -78,10 +79,13 @@ int main() {
 
     glm::mat4 orthoMat = glm::ortho(0.0f, 800.0f, 600.0f, 0.0f);
 
+    float xoff = 0.0f;
+
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(coordsShader);
         glUniformMatrix4fv(matLocation, 1, GL_FALSE, &orthoMat[0][0]);
+        glUniform1f(xOffLocation, xoff);
 
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
@@ -96,6 +100,9 @@ int main() {
 
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(0);
+
+        xoff -= 1;
+        if(xoff < -16) xoff = 0;
 
         glfwSwapBuffers(window);
         glfwPollEvents();

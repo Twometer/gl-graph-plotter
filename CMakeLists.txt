@@ -8,4 +8,4 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/glm)
 include_directories(${CMAKE_SOURCE_DIR}/inc)
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
-add_executable(gl_graph_plotter main.cpp glad.c Loader.cpp Loader.h)
+add_executable(gl_graph_plotter main.cpp glad.c Loader.cpp Loader.h RenderObject.cpp RenderObject.h)

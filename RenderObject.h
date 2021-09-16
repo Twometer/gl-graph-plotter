@@ -12,9 +12,10 @@ private:
     GLuint vao;
     GLuint vbo;
     int numVertices;
+    int primitiveType;
 
 public:
-    RenderObject(GLfloat *vertices, int verticesSize);
+    RenderObject(GLfloat *vertices, int verticesSize, int primitiveType);
 
     ~RenderObject();
 

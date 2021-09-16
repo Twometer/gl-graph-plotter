@@ -14,6 +14,8 @@ public:
     GLuint loadShader(std::string shaderName);
 
     GLuint loadShader(std::string vertPath, std::string fragPath);
+
+    GLuint loadShaderRaw(const char *vertex, const char *fragment);
 };
 
 

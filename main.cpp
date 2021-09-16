@@ -11,13 +11,45 @@
 
 using namespace std;
 
+#define WINDOW_WIDTH 1024.f
+#define WINDOW_HEIGHT 768.f
+#define GRID_SPACING 32
 
-#define WINDOW_WIDTH 1024.0f
-#define WINDOW_HEIGHT 768.0f
-#define GRID_SPACING 32.0f
+GLuint generateShader(const std::string &formula) {
+    auto fragment = "#version 330 core\n"
+                    "\n"
+                    "uniform vec4 color;\n"
+                    "out vec4 out_Colour;\n"
+                    "\n"
+                    "void main(void) {\n"
+                    "    out_Colour = color;\n"
+                    "}";
+
+    auto vertex = "#version 330 core\n"
+                  "#define PI 3.14159265359\n"
+                  "#define E  2.71828182845\n"
+                  "\n"
+                  "layout(location = 0) in vec2 position;\n"
+                  "\n"
+                  "uniform mat4 projectionMatrix;\n"
+                  "uniform float xOff;\n"
+                  "uniform float yOff;\n"
+                  "uniform float gridSize;"
+                  "\n"
+                  "float f(float x) {\n"
+                  "return " + formula + ";\n"
+                                        "}\n"
+                                        "void main(void) {\n"
+                                        "    float func_val = f((position.x - xOff) / gridSize) * gridSize;\n"
+                                        "    gl_Position = projectionMatrix * vec4(position + vec2(0, yOff + func_val), 0.0, 1.0);\n"
+                                        "}";
+
+
+    Loader loader{};
+    return loader.loadShaderRaw(vertex.c_str(), fragment);
+}
 
 int main() {
-
     if (!glfwInit()) {
         cout << "Failed to initialize GLFW" << endl;
         return 1;
@@ -38,89 +70,114 @@ int main() {
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         cout << "Failed to load OpenGL" << endl;
-        return 0;
+        glfwTerminate();
+        return 1;
     }
 
     glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
-    Loader loader = Loader();
 
+
+    Loader loader;
+
+    GLuint graphShader = generateShader("sin(x) + 0.1 * x");
     GLuint gridShader = loader.loadShader("grid");
-    GLint matLocation = glGetUniformLocation(gridShader, "projectionMatrix");
-    GLint xOffLocation = glGetUniformLocation(gridShader, "xOff");
-    GLint yOffLocation = glGetUniformLocation(gridShader, "yOff");
+    GLint grid_matLocation = glGetUniformLocation(gridShader, "projectionMatrix");
+    GLint grid_xOffLocation = glGetUniformLocation(gridShader, "xOff");
+    GLint grid_yOffLocation = glGetUniformLocation(gridShader, "yOff");
+    GLint grid_colorLocation = glGetUniformLocation(gridShader, "color");
 
-    auto *gridVertices = new GLfloat[5000];
+    GLint graph_matLocation = glGetUniformLocation(graphShader, "projectionMatrix");
+    GLint graph_xOffLocation = glGetUniformLocation(graphShader, "xOff");
+    GLint graph_yOffLocation = glGetUniformLocation(graphShader, "yOff");
+    GLint graph_colorLocation = glGetUniformLocation(graphShader, "color");
+    GLint graph_gridSizeLocation = glGetUniformLocation(graphShader, "gridSize");
+
+    auto *gridVertices = new GLfloat[2048];
     int gridVerticesAlloc = 0;
 
-    for (GLfloat i = -GRID_SPACING; i <= WINDOW_WIDTH + GRID_SPACING; i += GRID_SPACING) {
-        // Vertical
-        gridVertices[gridVerticesAlloc] = i;
+    // Vertical
+    for (int i = -GRID_SPACING; i <= WINDOW_WIDTH + GRID_SPACING; i += GRID_SPACING) {
+        gridVertices[gridVerticesAlloc] = (float) i;
         gridVertices[gridVerticesAlloc + 1] = -GRID_SPACING;
-        gridVertices[gridVerticesAlloc + 2] = i;
+        gridVertices[gridVerticesAlloc + 2] = (float) i;
         gridVertices[gridVerticesAlloc + 3] = WINDOW_HEIGHT + GRID_SPACING;
 
         gridVerticesAlloc += 4;
+    }
 
-        // Horizontal
+    // Horizontal
+    for (int i = -GRID_SPACING; i <= WINDOW_HEIGHT + GRID_SPACING; i += GRID_SPACING) {
         gridVertices[gridVerticesAlloc] = -GRID_SPACING;
-        gridVertices[gridVerticesAlloc + 1] = i;
-        gridVertices[gridVerticesAlloc + 2] = WINDOW_WIDTH * GRID_SPACING;
-        gridVertices[gridVerticesAlloc + 3] = i;
+        gridVertices[gridVerticesAlloc + 1] = (float) i;
+        gridVertices[gridVerticesAlloc + 2] = WINDOW_WIDTH + GRID_SPACING;
+        gridVertices[gridVerticesAlloc + 3] = (float) i;
 
         gridVerticesAlloc += 4;
     }
 
-    auto *graphVertices = new GLfloat[WINDOW_WIDTH * 4];
-    for (int i = 0; i < WINDOW_WIDTH; i++) {
-        graphVertices[i] = i;
+    auto *graphVertices = new GLfloat[4096];
+    int graphVerticesAlloc = 0;
+    for (int i = 0; i < WINDOW_WIDTH; i += 2) {
+        graphVertices[i + 0] = i;
         graphVertices[i + 1] = 0;
-        graphVertices[i + 2] = i + 1;
-        graphVertices[i + 3] = 0;
+        graphVerticesAlloc += 2;
     }
 
-    RenderObject grid(gridVertices, gridVerticesAlloc);
-    RenderObject graph(graphVertices, WINDOW_WIDTH * 4);
+    RenderObject grid(gridVertices, gridVerticesAlloc, GL_LINES);
+    RenderObject graph(graphVertices, graphVerticesAlloc, GL_LINE_STRIP);
 
-    glm::mat4 orthoMat = glm::ortho(0.0f, WINDOW_WIDTH, WINDOW_HEIGHT, 0.0f);
+    float crossVertices[] = {-10000, 0, 10000, 0, 0, -10000, 0, 10000};
+    RenderObject cross(crossVertices, 8, GL_LINES);
 
-    float xoff = 0.0f;
-    float yoff = 0.0f;
+    glm::mat4 orthoMat = glm::ortho(0.0f, WINDOW_WIDTH, 0.0f, WINDOW_HEIGHT);
 
-    float virtualX = 0.0f;
-    float virtualY = 0.0f;
+    int xoff = 0;
+    int yoff = 0;
+
+    int virtualX = WINDOW_WIDTH / 2;
+    int virtualY = WINDOW_HEIGHT / 2;
+
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glUseProgram(gridShader);
-        glUniformMatrix4fv(matLocation, 1, GL_FALSE, &orthoMat[0][0]);
-        glUniform1f(xOffLocation, xoff);
-        glUniform1f(yOffLocation, yoff);
+        glUniformMatrix4fv(grid_matLocation, 1, GL_FALSE, &orthoMat[0][0]);
+        glUniform1f(grid_xOffLocation, xoff);
+        glUniform1f(grid_yOffLocation, yoff);
+        glUniform4f(grid_colorLocation, 0.75, 0.75, 0.75, 0.45f);
         grid.Render();
 
-        glUniform1f(xOffLocation, virtualX);
-        glUniform1f(yOffLocation, virtualY);
+        glUniform1f(grid_xOffLocation, virtualX);
+        glUniform1f(grid_yOffLocation, virtualY);
+        glUniform4f(grid_colorLocation, 0, 0, 0, 1.0f);
+        cross.Render();
+
+        glUseProgram(graphShader);
+        glUniformMatrix4fv(graph_matLocation, 1, GL_FALSE, &orthoMat[0][0]);
+        glUniform1f(graph_xOffLocation, virtualX);
+        glUniform1f(graph_yOffLocation, virtualY);
+        glUniform4f(graph_colorLocation, 1.0, 0.25, 0.25, 1.0f);
+        glUniform1f(graph_gridSizeLocation, GRID_SPACING);
         graph.Render();
 
         static double lmx, lmy;
         double mx, my;
         glfwGetCursorPos(window, &mx, &my);
 
-        double dx = mx - lmx;
-        double dy = my - lmy;
+        int dx = (int) (mx - lmx);
+        int dy = -(int) (my - lmy);
 
         lmx = mx;
         lmy = my;
 
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
             xoff += dx;
-          //  if (xoff < -GRID_SPACING) xoff = 0;
-           // if (xoff > GRID_SPACING) xoff = 0;
+            xoff %= GRID_SPACING;
 
             yoff += dy;
-          //  if (yoff < -GRID_SPACING) yoff = 0;
-          //  if (yoff > GRID_SPACING) yoff = 0;
+            yoff %= GRID_SPACING;
 
             virtualX += dx;
             virtualY += dy;

@@ -47,17 +47,7 @@ GLuint Loader::loadShader(std::string shaderName) {
     return loadShader(shaderName + ".v.glsl", shaderName + ".f.glsl");
 }
 
-GLuint Loader::loadShader(std::string vertPath, std::string fragPath) {
-    std::string shaderBase = "shaders\\";
-    const char *vert = readFile(shaderBase + vertPath);
-    const char *frag = readFile(shaderBase + fragPath);
-
-    if (vert == nullptr || frag == nullptr) {
-        printf("Error: Failed to load shaders\n");
-        return 0;
-    }
-
-
+GLuint Loader::loadShaderRaw(const char *vert, const char *frag) {
     GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
     GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
 
@@ -86,3 +76,19 @@ GLuint Loader::loadShader(std::string vertPath, std::string fragPath) {
 
     return programId;
 }
+
+GLuint Loader::loadShader(std::string vertPath, std::string fragPath) {
+    std::string shaderBase = "shaders\\";
+    const char *vert = readFile(shaderBase + vertPath);
+    const char *frag = readFile(shaderBase + fragPath);
+
+    if (vert == nullptr || frag == nullptr) {
+        printf("Error: Failed to load shaders\n");
+        return 0;
+    }
+
+    return loadShaderRaw(vert, frag);
+
+}
+
+

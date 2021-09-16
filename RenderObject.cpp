@@ -4,7 +4,7 @@
 
 #include "RenderObject.h"
 
-RenderObject::RenderObject(GLfloat *vertices, int verticesSize) {
+RenderObject::RenderObject(GLfloat *vertices, int verticesSize, int primitiveType) : primitiveType(primitiveType) {
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
     glEnableVertexAttribArray(0);
@@ -15,9 +15,10 @@ RenderObject::RenderObject(GLfloat *vertices, int verticesSize) {
 }
 
 void RenderObject::Render() {
+    glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void *) nullptr);
-    glDrawArrays(GL_LINES, 0, numVertices);
+    glDrawArrays(primitiveType, 0, numVertices);
 }
 
 RenderObject::~RenderObject() {

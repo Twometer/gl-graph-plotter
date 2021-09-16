@@ -20,22 +20,24 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="gl_graph_plotter" targetName="glm_dummy" />
       <config projectName="gl_graph_plotter" targetName="gl_graph_plotter" />
+      <config projectName="gl_graph_plotter" targetName="glm_dummy" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
-      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7b6290a-6958-4514-881f-8dcbe6091e39" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/RenderObject.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RenderObject.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Loader.h" beforeDir="false" afterPath="$PROJECT_DIR$/Loader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RenderObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/RenderObject.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RenderObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/RenderObject.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/grid.f.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/shaders/grid.f.glsl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +62,16 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="cmake.loaded.for.project" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
@@ -71,20 +80,30 @@
       <recent name="E:\GitHub Repositories\gl-graph-plotter" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.Build All">
-    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" WORKING_DIR="file://.." PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gl_graph_plotter" RUN_TARGET_NAME="gl_graph_plotter" EXPLICIT_BUILD_TARGET_NAME="all">
+  <component name="RunManager" selected="CMake Application.gl_graph_plotter">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://.." PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gl_graph_plotter" RUN_TARGET_NAME="gl_graph_plotter" EXPLICIT_BUILD_TARGET_NAME="all">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="gl_graph_plotter" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gl_graph_plotter" TARGET_NAME="gl_graph_plotter" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gl_graph_plotter" RUN_TARGET_NAME="gl_graph_plotter">
+    <configuration name="gl_graph_plotter" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://.." PASS_PARENT_ENVS_2="true" PROJECT_NAME="gl_graph_plotter" TARGET_NAME="gl_graph_plotter" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gl_graph_plotter" RUN_TARGET_NAME="gl_graph_plotter">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="glm_dummy" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gl_graph_plotter" TARGET_NAME="glm_dummy" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gl_graph_plotter" RUN_TARGET_NAME="glm_dummy">
+    <configuration name="glm_dummy" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gl_graph_plotter" TARGET_NAME="glm_dummy" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gl_graph_plotter" RUN_TARGET_NAME="glm_dummy">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
@@ -106,6 +125,10 @@
       <updated>1531662835698</updated>
       <workItem from="1531662844124" duration="9514000" />
       <workItem from="1613380061167" duration="704000" />
+      <workItem from="1614254103121" duration="959000" />
+      <workItem from="1614522039025" duration="665000" />
+      <workItem from="1614878699396" duration="88000" />
+      <workItem from="1631781945892" duration="5691000" />
     </task>
     <servers />
   </component>
@@ -123,43 +146,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="734" y="354" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1613379186327">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="734" y="354" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-1920.352.1920.1040/2560.537.1600.860@0.0.2560.1400" timestamp="1613379186327" />
-    <state width="2517" height="387" key="GridCell.Tab.0.bottom" timestamp="1613380771342">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="387" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.352.1920.1040/2560.537.1600.860@0.0.2560.1400" timestamp="1613380771342" />
-    <state width="2517" height="387" key="GridCell.Tab.0.center" timestamp="1613380771341">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="387" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.352.1920.1040/2560.537.1600.860@0.0.2560.1400" timestamp="1613380771341" />
-    <state width="2517" height="387" key="GridCell.Tab.0.left" timestamp="1613380771341">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="387" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.352.1920.1040/2560.537.1600.860@0.0.2560.1400" timestamp="1613380771341" />
-    <state width="2517" height="387" key="GridCell.Tab.0.right" timestamp="1613380771341">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="387" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.352.1920.1040/2560.537.1600.860@0.0.2560.1400" timestamp="1613380771341" />
-    <state width="2517" height="482" key="GridCell.Tab.1.bottom" timestamp="1613380050234">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="482" key="GridCell.Tab.1.bottom/0.0.2560.1400/-1920.352.1920.1040/2560.537.1600.860@0.0.2560.1400" timestamp="1613380050234" />
-    <state width="2517" height="482" key="GridCell.Tab.1.center" timestamp="1613380050234">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="482" key="GridCell.Tab.1.center/0.0.2560.1400/-1920.352.1920.1040/2560.537.1600.860@0.0.2560.1400" timestamp="1613380050234" />
-    <state width="2517" height="482" key="GridCell.Tab.1.left" timestamp="1613380050234">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="482" key="GridCell.Tab.1.left/0.0.2560.1400/-1920.352.1920.1040/2560.537.1600.860@0.0.2560.1400" timestamp="1613380050234" />
-    <state width="2517" height="482" key="GridCell.Tab.1.right" timestamp="1613380050234">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="482" key="GridCell.Tab.1.right/0.0.2560.1400/-1920.352.1920.1040/2560.537.1600.860@0.0.2560.1400" timestamp="1613380050234" />
   </component>
 </project>

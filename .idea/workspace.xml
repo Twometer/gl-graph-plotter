@@ -30,14 +30,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7b6290a-6958-4514-881f-8dcbe6091e39" name="Default" comment="">
+    <list default="true" id="c7b6290a-6958-4514-881f-8dcbe6091e39" name="Default" comment="GPU-powered graph renderer">
+      <change afterPath="$PROJECT_DIR$/ImguiStyle.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loader.h" beforeDir="false" afterPath="$PROJECT_DIR$/Loader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RenderObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/RenderObject.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RenderObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/RenderObject.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shaders/grid.f.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/shaders/grid.f.glsl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +64,7 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -76,7 +73,11 @@
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\GitHub\gl-graph-plotter\lib" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\GitHub\gl-graph-plotter\inc" />
       <recent name="E:\GitHub Repositories\gl-graph-plotter" />
     </key>
   </component>
@@ -128,8 +129,16 @@
       <workItem from="1614254103121" duration="959000" />
       <workItem from="1614522039025" duration="665000" />
       <workItem from="1614878699396" duration="88000" />
-      <workItem from="1631781945892" duration="5691000" />
+      <workItem from="1631781945892" duration="7473000" />
     </task>
+    <task id="LOCAL-00001" summary="GPU-powered graph renderer">
+      <created>1631804933065</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1631804933065</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,5 +155,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="GPU-powered graph renderer" />
+    <option name="LAST_COMMIT_MESSAGE" value="GPU-powered graph renderer" />
   </component>
 </project>

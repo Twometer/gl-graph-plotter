@@ -1,10 +1,13 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <imgui/imgui_impl_opengl3.h>
+#include <imgui/imgui_impl_glfw.h>
 #include "Loader.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "RenderObject.h"
+#include "ImguiStyle.h"
 
 #pragma comment (lib, "glfw3.lib")
 #pragma comment (lib, "OpenGL32.lib")
@@ -74,8 +77,15 @@ int main() {
         return 1;
     }
 
-    glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+    glfwPollEvents();
+    glfwSwapInterval(1);
+    ImGui::CreateContext();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 100");
+    apply_imgui_styles();
 
+
+    glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
 
     Loader loader;
@@ -138,9 +148,17 @@ int main() {
     int virtualX = WINDOW_WIDTH / 2;
     int virtualY = WINDOW_HEIGHT / 2;
 
+    glDisable(GL_DEPTH_TEST);
+
+    char buf[256];
+    memset(buf, 0, sizeof(buf));
 
     while (!glfwWindowShouldClose(window)) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(gridShader);
         glUniformMatrix4fv(grid_matLocation, 1, GL_FALSE, &orthoMat[0][0]);
@@ -172,7 +190,7 @@ int main() {
         lmx = mx;
         lmy = my;
 
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS && !ImGui::GetIO().WantCaptureMouse) {
             xoff += dx;
             xoff %= GRID_SPACING;
 
@@ -183,12 +201,27 @@ int main() {
             virtualY += dy;
         }
 
+        ImGui::Begin("Formula input");
+
+        ImGui::InputText("", buf, 256);
+        ImGui::SameLine();
+        if (ImGui::Button("Plot")) {
+            glDeleteProgram(graphShader);
+            std::cout << buf << std::endl;
+            graphShader = generateShader(buf);
+        }
+        ImGui::End();
+
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
     glDeleteProgram(gridShader);
+    ImGui_ImplGlfw_Shutdown();
 
     return 0;
 }
